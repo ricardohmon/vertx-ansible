@@ -6,6 +6,7 @@ The example application used for this demo ([Simple REST Micro-service](https://
 ##Requirements:
 - Ansible 2.0
 - Vagrant
+- Virtualbox
 
 ## Instructions:
 - Clone this repository.
