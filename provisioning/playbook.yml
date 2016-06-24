@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - command: echo "$PATH"
+      register: default_path
+
+- hosts: all
+  remote_user: root
+  become: yes
+  environment:
+    JAVA_HOME: /usr/lib/jvm/jre-1.8.0-openjdk/
+    PATH: "{{ default_path.stdout }}:/usr/share/vertx/bin"
+  roles:
+    - vertx-standalone
