@@ -1,0 +1,1 @@
+app_jar: "{{ jenkins_job_workspace }}/solution/compulsive-traders/target/compulsive-traders-1.0-SNAPSHOT-fat.jar"

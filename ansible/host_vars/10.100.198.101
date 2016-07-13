@@ -1,0 +1,1 @@
+app_jar: "{{ jenkins_job_workspace }}/solution/audit-service/target/audit-service-1.0-SNAPSHOT-fat.jar"

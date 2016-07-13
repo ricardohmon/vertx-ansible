@@ -1,0 +1,1 @@
+app_jar: "{{ jenkins_job_workspace }}/solution/portfolio-service/target/portfolio-service-1.0-SNAPSHOT-fat.jar"

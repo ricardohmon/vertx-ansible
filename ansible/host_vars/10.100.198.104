@@ -1,0 +1,1 @@
+app_jar: "{{ jenkins_job_workspace }}/solution/quote-generator/target/quote-generator-1.0-SNAPSHOT-fat.jar"

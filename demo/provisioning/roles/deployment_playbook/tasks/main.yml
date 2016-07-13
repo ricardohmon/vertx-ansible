@@ -1,0 +1,34 @@
+- name: Ensure Git are installed
+  yum: name={{item}} state=present
+  with_items:
+   - git-all
+   - epel-release
+
+- name: Ensure Ansible (EPEL required) is installed
+  yum: name={{item}} state=present
+  with_items:
+   - ansible
+
+- name: Ensure a directory to store deployment playbook
+  file:
+    path: "/ansible"
+    state: directory
+    mode: 0644
+
+- name: App deployment playbook is present
+  copy:
+    src: "../../ansible/"
+    dest: "/var/lib/jenkins/ansible/"
+    mode: 0644
+
+- name: Ensure a directory to store Vagrant private key
+  file:
+    path: "/vagrant"
+    state: directory
+    mode: 0600
+
+- name: Vagrant private key is present
+  copy:
+    src: "vms_private_key"
+    dest: "/vagrant/vms_private_key"
+    mode: 0600

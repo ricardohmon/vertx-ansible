@@ -3,12 +3,14 @@
   tasks:
     - command: echo "$PATH"
       register: default_path
+    - command: echo "$WORKSPACE"
+      register: jenkins_job_workspace
 
 - hosts: all
-  remote_user: root
+  remote_user: vagrant
   become: yes
   environment:
     JAVA_HOME: /usr/lib/jvm/jre-1.8.0-openjdk/
-    PATH: "{{ default_path.stdout }}:/usr/share/vertx/bin"
+    PATH: "{{ default_path.stdout }}"
   roles:
     - vertx-standalone

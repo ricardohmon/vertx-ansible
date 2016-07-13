@@ -1,0 +1,15 @@
+# audit-service
+10.100.198.101 ansible_ssh_user='vagrant'
+
+# compulsive-traders
+10.100.198.102 ansible_ssh_user='vagrant'
+
+# portfolio-service
+10.100.198.103 ansible_ssh_user='vagrant'
+
+# quote-generator
+10.100.198.104 ansible_ssh_user='vagrant'
+
+# trader-dashboard
+10.100.198.105 ansible_ssh_user='vagrant'
+

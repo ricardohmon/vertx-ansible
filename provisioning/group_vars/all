@@ -1,5 +1,0 @@
----
-# Universal values
-jdk_version: java-1.8.0-openjdk
-app_jar: web-examples-3.2.1.jar
-app_class: io.vertx.example.web.rest.SimpleREST

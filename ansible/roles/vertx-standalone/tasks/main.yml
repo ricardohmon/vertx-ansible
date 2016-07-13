@@ -1,0 +1,37 @@
+---
+- name: Install Java 1.8 and some basic dependencies
+  yum: name={{item}} state=present
+  with_items:
+   - unzip
+   - java-1.8.0-openjdk
+
+- name: Ensure app dir exists
+  file: path=/usr/share/vertx_app/ recurse=yes state=directory
+
+- name: Copy the Vert.x application jar package
+  copy: src={{ app_jar }} dest=/usr/share/vertx_app/app-fatjar.jar mode=0755
+
+- name: Copy the application config file
+  copy: src=config.json dest=/usr/share/vertx_app/config.json mode=0755
+
+- name: ls command on Vert.x app folder
+  command: ls -l /usr/share/vertx_app/
+
+- name: List running Vert.x applications
+  command: java -jar /usr/share/vertx_app/app-fatjar.jar list
+  register: running_app_list
+
+- name: Stop app if it is already running (check if multiple instances)
+  command: java -jar /usr/share/vertx_app/app-fatjar.jar stop {{ item | regex_replace('^(?P<V_id>.[8]-.[4]-.[4].[4].[12])\t.*', '\\g<V_id>') }}
+  with_items: "{{ running_app_list.stdout_lines }}"
+  when: item | regex_replace('.*\t(.*)$', '\\1') | match('.*/app-fatjar.jar$')
+
+- name: Run Vert.x application as a service, ignore the SIGHUP signal
+  shell: nohup java -jar /usr/share/vertx_app/app-fatjar.jar start -cluster -conf /usr/share/vertx_app/config.json -cp .
+  register: svc_run_out
+
+- name: Print run output
+  debug: var=svc_run_out.stdout_lines
+
+- name: List again running Vert.x applications
+  command: java -jar /usr/share/vertx_app/app-fatjar.jar list
