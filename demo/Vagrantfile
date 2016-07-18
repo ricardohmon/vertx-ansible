@@ -2,20 +2,16 @@ Vagrant.require_version ">= 1.7.0"
 
 Vagrant.configure(2) do |config|
 
+  # All boxes are based on a CentOS 7 box
   config.vm.box = "centos/7"
 
-  # Disable the new default behavior introduced in Vagrant 1.7, to
-  # ensure that all Vagrant machines will use the same SSH key pair.
-  # See https://github.com/mitchellh/vagrant/issues/5005
+  # Ensure that all Vagrant machines will use the same SSH key pair.
   config.ssh.insert_key = false
 
   # Define our virtual machines
   config.vm.define "cd" do |d|
-    d.vm.hostname = "jenkins-cd"
+    d.vm.hostname = "cd"
     d.vm.network :private_network, ip: "10.100.198.10"
-    #d.vm.hostname = "cd"
-    d.vm.box = "centos/7"
-    #d.vm.network "forwarded_port", guest: 8088, host: 8081
     d.vm.provision "ansible" do |ansible|
       ansible.verbose = "v"
       ansible.playbook = "provisioning/playbook.yml"
@@ -23,24 +19,17 @@ Vagrant.configure(2) do |config|
     d.vm.provider "virtualbox" do |v|
       v.memory = 1024
     end
-
-    # Config sync folder
-    #if (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
-    #  d.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=711,fmode=611"]
-    #  d.vm.synced_folder "../ansible", "/ansible", mount_options: ["dmode=711,fmode=611"]
-    #else
-    #  d.vm.synced_folder ".", "/vagrant"
-    #  d.vm.synced_folder "../ansible", "/ansible"
-    #end
   end
 
   config.vm.define "audit-service" do |d|
     d.vm.hostname = "audit-service"
     d.vm.network :private_network, ip: "10.100.198.101"
-    d.vm.network "forwarded_port", guest: 8080, host: 8101
     d.vm.provision "ansible" do |ansible|
       ansible.verbose = "v"
       ansible.playbook = "provisioning/simple_playbook.yml"
+    end
+    d.vm.provider "virtualbox" do |v|
+      v.memory = 256
     end
   end
 
@@ -51,6 +40,9 @@ Vagrant.configure(2) do |config|
       ansible.verbose = "v"
       ansible.playbook = "provisioning/simple_playbook.yml"
     end
+    d.vm.provider "virtualbox" do |v|
+      v.memory = 256
+    end
   end
 
   config.vm.define "portfolio-service" do |d|
@@ -60,15 +52,20 @@ Vagrant.configure(2) do |config|
       ansible.verbose = "v"
       ansible.playbook = "provisioning/simple_playbook.yml"
     end
+    d.vm.provider "virtualbox" do |v|
+      v.memory = 256
+    end
   end
 
   config.vm.define "quote-generator" do |d|
     d.vm.hostname = "quote-generator"
     d.vm.network :private_network, ip: "10.100.198.104"
-    d.vm.network "forwarded_port", guest: 8080, host: 8104
     d.vm.provision "ansible" do |ansible|
       ansible.verbose = "v"
       ansible.playbook = "provisioning/simple_playbook.yml"
+    end
+    d.vm.provider "virtualbox" do |v|
+      v.memory = 256
     end
   end
 
@@ -78,6 +75,9 @@ Vagrant.configure(2) do |config|
     d.vm.provision "ansible" do |ansible|
       ansible.verbose = "v"
       ansible.playbook = "provisioning/simple_playbook.yml"
+    end
+    d.vm.provider "virtualbox" do |v|
+      v.memory = 256
     end
   end
 end

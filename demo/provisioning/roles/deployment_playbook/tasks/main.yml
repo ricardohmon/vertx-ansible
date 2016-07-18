@@ -13,22 +13,30 @@
   file:
     path: "/ansible"
     state: directory
-    mode: 0644
+    mode: 0744
+    owner: jenkins
+    group: jenkins
 
-- name: App deployment playbook is present
+- name: Ensure Ansible playbook and related config stuff is present
   copy:
     src: "../../ansible/"
-    dest: "/var/lib/jenkins/ansible/"
-    mode: 0644
+    dest: "/ansible/"
+    mode: 0744
+    owner: jenkins
+    group: jenkins
 
-- name: Ensure a directory to store Vagrant private key
+- name: Ensure the existence of a directory to store Vagrant private key
   file:
     path: "/vagrant"
     state: directory
-    mode: 0600
+    mode: 0744
+    owner: jenkins
+    group: jenkins
 
 - name: Vagrant private key is present
   copy:
     src: "vms_private_key"
     dest: "/vagrant/vms_private_key"
-    mode: 0600
+    mode: 0700
+    owner: jenkins
+    group: jenkins
