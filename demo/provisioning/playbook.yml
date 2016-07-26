@@ -14,6 +14,7 @@
     jenkins_http_port: 8088
     solita_jenkins_security_realm: none
     solita_jenkins_plugins:
+      - maven-plugin
       - git
       - workflow-aggregator
       - workflow-multibranch
