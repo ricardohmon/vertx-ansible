@@ -1,1 +1,4 @@
 app_jar: "{{ jenkins_job_workspace }}/solution/quote-generator/target/quote-generator-1.0-SNAPSHOT-fat.jar"
+app_config: "{{ jenkins_job_workspace }}/solution/quote-generator/src/conf/config.json"
+launch_params: "-cluster -conf /etc/vertx_app/config.json"
+vertx_opts: "-Dvertx.hostip=10.100.198.104"

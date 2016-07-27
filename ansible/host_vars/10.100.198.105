@@ -1,1 +1,3 @@
 app_jar: "{{ jenkins_job_workspace }}/trader-dashboard/target/trader-dashboard-1.0-SNAPSHOT-fat.jar"
+launch_params: "-cluster"
+vertx_opts: ""
