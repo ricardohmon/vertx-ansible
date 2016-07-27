@@ -1,15 +1,15 @@
-# audit-service
+[audit-service]
 10.100.198.101
 
-# compulsive-traders
+[compulsive-traders]
 10.100.198.102
 
-# portfolio-service
+[portfolio-service]
 10.100.198.103
 
-# quote-generator
+[quote-generator]
 10.100.198.104
 
-# trader-dashboard
+[trader-dashboard]
 10.100.198.105
 
