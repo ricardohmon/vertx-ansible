@@ -1,0 +1,3 @@
+---
+- name: Ensure location for DB
+  file: path=/var/lib/vertx_app/ recurse=yes state=directory mode=0744
