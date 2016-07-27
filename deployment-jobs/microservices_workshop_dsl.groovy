@@ -1,7 +1,7 @@
 job('vertx-microservices-workshop-job') {
     jdk('JDK8')
     scm {
-        git('git://github.com/cescoffier/vertx-microservices-workshop.git')
+        git('git://github.com/ricardohmon/vertx-microservices-workshop.git','without-docker')
     }
     triggers {
         scm('*/15 * * * *')
