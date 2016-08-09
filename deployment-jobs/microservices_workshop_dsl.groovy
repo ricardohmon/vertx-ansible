@@ -1,5 +1,8 @@
 job('vertx-microservices-workshop-job') {
     jdk('JDK8')
+    wrappers {
+        colorizeOutput('xterm')
+    }
     scm {
         git('git://github.com/ricardohmon/vertx-microservices-workshop.git','without-docker')
     }
@@ -42,6 +45,7 @@ job('vertx-microservices-workshop-job') {
         	inventoryPath('/ansible/hosts')
 	        ansibleName('Ansible2.0')
 	        credentialsId('vagrant-key')
+            colorizedOutput(true)
 	    }
     }
 }
