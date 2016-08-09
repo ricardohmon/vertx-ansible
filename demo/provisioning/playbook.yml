@@ -1,14 +1,7 @@
 ---
 - hosts: all
-  tasks:
-    - command: echo "$PATH"
-      register: default_path
-
-- hosts: all
   remote_user: root
   become: yes
-  environment:
-    PATH: "{{ default_path.stdout }}"
   vars:
     jenkins_hostname: cd
     jenkins_http_port: 8088
@@ -16,9 +9,9 @@
     solita_jenkins_plugins:
       - maven-plugin
       - git
-      - workflow-aggregator
-      - workflow-multibranch
       - ansible
+      # Optional
+      - ansicolor
   roles:
     - solita.jenkins
     - deployment_playbook
