@@ -1,5 +1,5 @@
 ---
-  # A special playbook for the service with a db
+  # A special task for the service with a db
 
 - hosts: audit-service
   remote_user: vagrant
@@ -9,6 +9,7 @@
 
   # Make the deployment to one host at the time (initialization purposes)
   # Enforce a specific inventory order
+
 - hosts: quote-generator:portfolio-service:compulsive-traders:audit-service:trader-dashboard
   remote_user: vagrant
   become: yes
@@ -19,7 +20,7 @@
   # Before deploying our app make sure to stop any previous instance (only if it was deployed before)
 
   pre_tasks:
-  - name: check if the app jar exists in the target already
+  - name: Check if the app jar exists in the target already
     stat: path=/usr/share/vertx_app/app-fatjar.jar
     register: st
 
