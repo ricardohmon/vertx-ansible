@@ -16,29 +16,15 @@ job('vertx-microservices-workshop-job') {
             mavenInstallation(mvnInst)
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
     	}
-        maven {
-            goals('-e package')
-            mavenInstallation(mvnInst)
-            rootPOM('solution/quote-generator/pom.xml')
-            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
-        }
-        maven {
-            goals('-e package')
-            mavenInstallation(mvnInst)
-            rootPOM('solution/portfolio-service/pom.xml')
-            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
-        }
-        maven {
-            goals('-e package')
-            mavenInstallation(mvnInst)
-            rootPOM('solution/audit-service/pom.xml')
-            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
-        }
-        maven {
-            goals('-e package')
-            mavenInstallation(mvnInst)
-            rootPOM('solution/compulsive-traders/pom.xml')
-            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+
+        def poms = ['quote-generator', 'portfolio-service', 'audit-service', 'compulsive-traders']
+        poms.each { moduleName ->
+            maven {
+                goals('-e package')
+                mavenInstallation(mvnInst)
+                rootPOM("solution/${moduleName}/pom.xml") // substitute module name in path
+                localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+            }
         }
 
       	ansiblePlaybook('/ansible/playbook.yml') {
